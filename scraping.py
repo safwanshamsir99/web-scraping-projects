@@ -4,8 +4,13 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import time
 
+headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 \
+           (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36'}
+
 opsi = webdriver.ChromeOptions()
 opsi.add_argument('--headless')
+opsi.add_argument('--no-sandbox')
+opsi.add_argument('--disable-notifications')
 servis = Service('chromedriver.exe')
 driver = webdriver.Chrome(service=servis, options=opsi)
 
@@ -30,10 +35,10 @@ data = BeautifulSoup(content,'html.parser')
 # print(data.encode("utf-8"))
 
 i = 1
-base_url = "https://shopee.com.my"
+#base_url = "https://shopee.com.my"
 
-list_nama,list_gambar,list_harga,list_link,list_terjual,list_lokasi=[],[],[],[],[],[]
-
+#list_nama,list_gambar,list_harga,list_link,list_terjual,list_lokasi=[],[],[],[],[],[]
+'''
 for area in data.find_all('div',class_="col-xs-2-4 shopee-search-item-result__item"):
     print('proses data ke-'+str(i))
     nama = area.find('div',class_="ie3A+n bM+7UW Cve6sh").get_text()
@@ -52,8 +57,8 @@ for area in data.find_all('div',class_="col-xs-2-4 shopee-search-item-result__it
     list_terjual.append(terjual)
     i+=1
     print("------")
-
-df = pd.DataFrame({'Nama':list_nama,'Gambar':list_gambar,'Harga':list_harga,'Link':list_link,'Terjual':list_terjual})
-writer = pd.ExcelWriter('macbook.xlsx')
-df.to_excel(writer,'Sheet1',index=False)
-writer.save()
+'''
+#df = pd.DataFrame({'Nama':list_nama,'Gambar':list_gambar,'Harga':list_harga,'Link':list_link,'Terjual':list_terjual})
+#writer = pd.ExcelWriter('macbook.xlsx')
+#df.to_excel(writer,'Sheet1',index=False)
+#writer.save()
